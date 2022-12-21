@@ -1,0 +1,128 @@
+{% extends 'home.html' %} {% block content %}
+
+<ul
+  class="ms-4 navbar-nav me-auto mb-2 mb-lg-0 list-group list-group-horizontal"
+>
+<li class="nav-item">
+    <a
+      class="nav-link"
+      href="{% url 'home'%}"
+      style="color: #767f88; padding: 23px 12px 32px"
+      >ALL</a
+    >
+    </li>
+
+  {% for c in cat %}
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      href="{% url 'singlecat' c.id %}"
+      style="color: #767f88; padding: 23px 12px 32px"
+      >{{ c.cat_title|upper }}</a
+    >
+    {% endfor %}
+  </li>
+</ul>
+
+<div class="container-fluid mt-2">
+  <div class="row p-4">
+    <div class="card border-0">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <img
+              class="mb-3"
+              src="{{ book.image.url }}"
+              style="width: 250px; height: 400px"
+              alt=""
+              srcset=""
+            />
+            <p>
+              <span style="font-size: 15px; font-weight: 600"
+                >Supplemental materials are not guaranteed for used textbooks or
+                rentals</span
+              >
+              (access codes, DVDs, CDs, workbooks).
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h3 style="font-weight: 400; text-transform: uppercase">
+              {{ book.title }}
+            </h3>
+            <div class="d-flex mt-3">
+              <h6
+                style="font-weight: 400; text-transform: uppercase; color: grey"
+              >
+                Author :
+              </h6>
+              <h6
+                class=""
+                style="
+                  font-weight: 400;
+                  text-transform: uppercase;
+                  color: #e94d1c;
+                "
+              >
+                {{ book.author }}
+              </h6>
+            </div>
+            <p class="mt-4" style="color: rgb(75, 75, 75); font-size: 14px">
+            {{ book.description }}
+            </p>
+            <div class="d-flex mt-5">
+              <h6
+                style="
+                  font-size: 14px;
+                  font-weight: 400;
+                  text-transform: uppercase;
+                  color: grey;
+                "
+              >
+                ISBN :
+              </h6>
+              <h6 class="" style="font-size: 14px; font-weight: 400">
+                {{ book.isbn }}
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card mb-3" style="max-width: 25rem">
+              <div
+                class="card-header text-white"
+                style="
+                  background-color: #67809f;
+                  font-weight: 500;
+                  text-transform: uppercase;
+                "
+              >
+                <span>Buy</span>
+                <span
+                  class="float-end ms-2"
+                  style="
+                    font-size: 14px;
+                    color: white;
+                    text-decoration: line-through;
+                  "
+                  >(Rs.{{ book.original_price }})</span
+                >
+                <span class="float-end">Rs.{{ book.current_price }}</span>
+              </div>
+
+              <div class="card-body" style="background: white">
+                <button
+                  class="btn btn-outline-secondary border-0 text-white float-end"
+                  type="submit"
+                  id="button-addon2"
+                  style="background-color: #e94d1c; font-size: 15px"
+                >
+                  ADD TO CART
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

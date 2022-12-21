@@ -1,0 +1,85 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+
+<ul class=" ms-4 navbar-nav me-auto mb-2 mb-lg-0 list-group list-group-horizontal">
+    <li class="nav-item">
+        <a
+          class="nav-link"
+          href="{% url 'home'%}"
+          style="color: #767f88; padding: 23px 12px 32px"
+          >ALL</a
+        >
+        </li>
+    
+  {% for c in cat %}
+  <li class="nav-item">
+    
+    <a class="nav-link" href="{% url 'singlecat' c.id %}" style="color: #767f88;
+    padding: 23px 12px 32px;
+"
+      >{{ c.cat_title|upper }}</a
+    >
+ {% endfor %}
+</li>
+  </ul>
+
+
+
+  <div class="container mt-4">
+   <div class="card" style="    border: 3px solid #ffffff;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex">
+                    {% if request.path == '/' %}
+                    <h5  style="font-weight:400;flex-grow: 1;">Top Selling Books</h5>
+                    {% else %}
+                    <h5  style="font-weight:400;flex-grow: 1;">{{catdata|upper}}</h5>
+                    {% endif %}
+                    <button  class="btn btn-outline-secondary border-0 text-white float-end"
+                    type="button"
+                    id="button-addon2"
+                    style="
+                        border-radius: 20px;
+                      background-color: #e94d1c;
+                      font-size: 15px;
+                    ">View All</button>
+                </div>
+
+                <hr style="color: rgb(109, 109, 109);">
+            </div>
+
+            
+                <div class="row ms-3">
+                    {% for b in book %}
+                    <div class="col-md-3 col-6 me-3" style="width:227px">
+                       <a href="{% url 'singlepage' b.id%}" style="text-decoration:none">
+                        <div class="card border-0" style="height: 300px;">
+                            <div class="card-body  mx-auto" >
+                                <img src="{{b.image.url}}" style="width: 200px"  height="220px" alt="">
+                                <p class="mt-1" style="text-transform: uppercase;font-size: 15px;color: black;">{{ b.title|slice:15 }}...</p>
+                                <div class="d-flex">
+                                    <p class="" style="margin-top: -8px;   color: #59c4bc;
+                                    font: 16px 'PT Sans Narrow', sans-serif;
+                                    flex-grow: 1;
+                                    ">Rs. {{ b.current_price }}</p>    
+                                    <p class="" style=" margin-top: -8px;color: #bf360c;
+                                    font: 14.5px 'PT Sans Narrow', sans-serif;
+                                  text-decoration: line-through;
+                                    ">Rs.  {{ b.original_price }}</p>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            
+        </div>
+    </div>
+   </div>
+  </div>
+{% endblock  %}
